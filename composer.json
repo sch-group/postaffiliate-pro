@@ -1,0 +1,32 @@
+{
+    "name": "sch-group/postaffiliate-pro",
+    "description": "Post affiliate pro connector",
+    "type": "library",
+    "require": {
+        "php": "^7.2"
+    },
+    "require-dev": {
+        "phpunit/phpunit": "~6.5.5",
+        "matomo/ini": "^2.0.2"
+    },
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "aahmetgaliev",
+            "email": "ainur_ahmetgalie@mail.ru"
+        }
+    ],
+    "autoload": {
+        "psr-4": {
+            "SchGroup\\PostAffiliatePro\\" : "src/"
+        },
+        "files": [
+            "src/Lib/PapApi.class.php"
+        ]
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "SchGroup\\Tests\\": "tests/"
+        }
+    }
+}
