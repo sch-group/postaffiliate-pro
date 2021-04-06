@@ -30,7 +30,9 @@ class PostAffiliateSaleFinder extends PostAffiliateConnector implements SaleFind
         } catch (\Exception $exception) {
             return null;
         }
-        dd($sales);
+        if(empty($sales)) {
+            return null;
+        }
         $sale = array_shift($sales);
 
         return new GetSaleResponse(
