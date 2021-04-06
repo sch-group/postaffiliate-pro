@@ -34,6 +34,7 @@ class PostAffiliateConfig
      * @param string $login
      * @param string $password
      * @param string|null $accountId
+     * @param bool $debugMode
      */
     public function __construct(string $host, string $login, string $password, string $accountId = null, bool $debugMode = false)
     {
