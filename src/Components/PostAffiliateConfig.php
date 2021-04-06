@@ -23,6 +23,10 @@ class PostAffiliateConfig
      * @var string
      */
     private $accountId;
+    /**
+     * @var bool
+     */
+    private $debugMode;
 
     /**
      * PostAffiliateConfig constructor.
@@ -31,12 +35,21 @@ class PostAffiliateConfig
      * @param string $password
      * @param string|null $accountId
      */
-    public function __construct(string $host, string $login, string $password, string $accountId = null)
+    public function __construct(string $host, string $login, string $password, string $accountId = null, bool $debugMode = false)
     {
         $this->host = $host;
         $this->login = $login;
         $this->password = $password;
         $this->accountId = $accountId;
+        $this->debugMode = $debugMode;
+    }
+
+    /**
+     * @return bool
+     */
+    public function isDebugMode(): bool
+    {
+        return $this->debugMode;
     }
 
     /**

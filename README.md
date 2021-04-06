@@ -1,43 +1,37 @@
-API PICKPOINT PHP SDK
-
-https://pickpoint.ru/sales/api/
+POSTAFFILIATE-PRO partner program integration
 
 @ainurecm telegram
 
 ```bash
-composer require sch-group/pickpoint
-```
-Примеры: 
-
-Инициализация
-```
-$config = [
- 'host' => '',
- 'login' => '',
- 'password' => '',
- 'ikn' => '',
-];    
-
-$pickPointConf = new PickPointConf($config['host'], $config['login'], $config['password'], $config['ikn']);
-
-$defaultPackageSize = new PackageSize(20, 20,20); // может быть null
-
-$senderDestination = new SenderDestination('Москва', 'Московская обл.'); // Адрес отправителя
-
-$client = new PickPointConnector($pickPointConf, $senderDestination, $defaultPackageSize);
- 
- 
-Так же можно добавить кэширование, для ускорения запроса на авторизацию 
-$redisCacheConf = [
- 'host' => '127.0.0.1',
- 'port' => 6379
-];
-
-$client = new PickPointConnector($pickPointConf, $senderDestination, $defaultPackageSize, $redisCacheConf);
-
- 
+composer require sch-group/postaffiliate-pro
 ```
 
-Получение массива постаматов
+Create sale:
+```
+$postAffiliateConfig = new PostAffiliateConfig($config['host'], $config['login'], $config['password']);
+$saleGenerator = new PostAffiliateSaleGenerator($postAffiliateConfig);
+$testSale = new SaleData(
+            'accountId',
+            1,
+            "1234",
+            "127.0.0.1",// ip of sale
+            SaleData::PENDING_STATUS,
+            "ce0efd75" // banner id
+        );
 
+ $saleGenerator->createSaleBy($testSale); 
+```
+Find sale:
+```
+$saleFinder = new PostAffiliateSaleFinder($postAffiliateConfig);
+$orderNumber = 'test_order_number';
+$sales  = $saleFinder->findSalesBy($orderNumber);
+$sale = $saleFinder->findFirstSaleBy($orderNumber);
+```
+Update sale's status:
+```
+$statusChanger = new PostAffiliateSaleStatusChanger($postAffiliateConfig);
+$orderNumber = 'test_order_number';
+$sale = $saleFinder->findFirstSaleBy($orderNumber);
+$statusChanger->changeSaleStatus($sale->getTransactionId(), SaleData::APPROVED_STATUS);
 ```

@@ -20,7 +20,7 @@ class PostAffiliateSaleGenerator extends PostAffiliateConnector implements SaleG
     {
         parent::__construct($config);
         $this->saleTracker = new Pap_Api_SaleTracker(
-            $this->getPostAffiliateConfig()->getHost() . '/scripts/sale.php', true
+            $this->getPostAffiliateConfig()->getHost() . '/scripts/sale.php', $config->isDebugMode()
         );
     }
 
