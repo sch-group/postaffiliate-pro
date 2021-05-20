@@ -32,6 +32,7 @@ class PostAffiliateSaleGenerator extends PostAffiliateConnector implements SaleG
         $this->saleTracker->setAccountId($saleData->getAccountId());
         if ($saleData->getIp()) {
             $this->saleTracker->setIp($saleData->getIp());
+            $this->saleTracker->setVisitorId();
         }
         $affiliateSale = $this->saleTracker->createSale();
         $affiliateSale->setTotalCost($saleData->getTotal());

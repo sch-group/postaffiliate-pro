@@ -6,11 +6,11 @@ namespace SchGroup\Tests;
 
 use SchGroup\PostAffiliatePro\Components\SaleData;
 use SchGroup\PostAffiliatePro\Connectors\PostAffiliateSaleFinder;
-use SchGroup\PostAffiliatePro\Connectors\PostAffiliateSaleStatusChanger;
+use SchGroup\PostAffiliatePro\Connectors\PostAffiliateSaleChanger;
 
 class SaleStatusChangerTest extends InitTest
 {
-    /** @var PostAffiliateSaleStatusChanger */
+    /** @var PostAffiliateSaleChanger */
     protected $statusChanger;
 
     /** @var PostAffiliateSaleFinder */
@@ -26,7 +26,7 @@ class SaleStatusChangerTest extends InitTest
     public function __construct($name = null, array $data = array(), $dataName = '')
     {
         parent::__construct($name, $data, $dataName);
-        $this->statusChanger = new PostAffiliateSaleStatusChanger($this->postAffiliateConfig);
+        $this->statusChanger = new PostAffiliateSaleChanger($this->postAffiliateConfig);
         $this->saleFinder = new PostAffiliateSaleFinder($this->postAffiliateConfig);
     }
 
@@ -35,7 +35,7 @@ class SaleStatusChangerTest extends InitTest
     {
         $orderNumber = $this->configForTest['test_order_number'];
         $sale = $this->saleFinder->findFirstSaleBy($orderNumber);
-        $this->statusChanger->changeSaleStatus($sale->getTransactionId(), SaleData::APPROVED_STATUS);
+        $this->statusChanger->changeSaleStatus($sale->getTransactionId(), SaleData::APPROVED_STATUS, 500);
     }
 
     /** @test */
