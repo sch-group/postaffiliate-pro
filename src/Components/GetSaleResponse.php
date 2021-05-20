@@ -17,6 +17,8 @@ class GetSaleResponse
     const COMMISSION_COLUMN = 'commission';
 
     const USER_ID_COLUMN = 'userid';
+
+    const TOTAL_COST = 'totalcost';
     /**
      * @var string
      */
@@ -37,6 +39,10 @@ class GetSaleResponse
      * @var string
      */
     private $userId;
+    /**
+     * @var float
+     */
+    private $totalCost;
 
     /**
      * SaleRetrieved constructor.
@@ -45,19 +51,30 @@ class GetSaleResponse
      * @param string $campaignId
      * @param string $commission
      * @param string $userId
+     * @param float $totalCost
      */
     public function __construct(
         string $id,
         string $transactionId,
         string $campaignId,
         string $commission,
-        string $userId
+        string $userId,
+        float $totalCost
     ) {
         $this->id = $id;
         $this->transactionId = $transactionId;
         $this->campaignId = $campaignId;
         $this->commission = $commission;
         $this->userId = $userId;
+        $this->totalCost = $totalCost;
+    }
+
+    /**
+     * @return float
+     */
+    public function getTotalCost(): float
+    {
+        return $this->totalCost;
     }
 
     /**
@@ -111,7 +128,8 @@ class GetSaleResponse
             [self::CAMPAIGN_ID_COLUMN],
             [self::ORDER_ID_COLUMN],
             [self::COMMISSION_COLUMN],
-            [self::USER_ID_COLUMN]
+            [self::USER_ID_COLUMN],
+            [self::TOTAL_COST]
         ];
     }
 }

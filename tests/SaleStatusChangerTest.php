@@ -35,7 +35,10 @@ class SaleStatusChangerTest extends InitTest
     {
         $orderNumber = $this->configForTest['test_order_number'];
         $sale = $this->saleFinder->findFirstSaleBy($orderNumber);
-        $this->statusChanger->changeSaleStatus($sale->getTransactionId(), SaleData::APPROVED_STATUS, 500);
+        $newTotalCost = rand(0,100);
+        $this->statusChanger->changeSaleStatus($sale->getTransactionId(), SaleData::APPROVED_STATUS, $newTotalCost);
+        $sale = $this->saleFinder->findFirstSaleBy($orderNumber);
+        $this->assertEquals($newTotalCost, $sale->getTotalCost());
     }
 
     /** @test */

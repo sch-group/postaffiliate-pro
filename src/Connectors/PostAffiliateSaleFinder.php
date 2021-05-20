@@ -40,7 +40,8 @@ class PostAffiliateSaleFinder extends PostAffiliateConnector implements SaleFind
             $sale[GetSaleResponse::TRANSACTION_ID_COLUMN],
             $sale[GetSaleResponse::CAMPAIGN_ID_COLUMN],
             $sale[GetSaleResponse::COMMISSION_COLUMN],
-            $sale[GetSaleResponse::USER_ID_COLUMN]
+            $sale[GetSaleResponse::USER_ID_COLUMN],
+            $sale[GetSaleResponse::TOTAL_COST]
         );
     }
 
