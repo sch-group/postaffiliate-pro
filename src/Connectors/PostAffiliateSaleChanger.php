@@ -34,6 +34,7 @@ class PostAffiliateSaleChanger extends PostAffiliateConnector implements SaleSta
         if ($this->isPossibleUpdateStatus($toStatus, $sale)) {
             $sale->setStatus($toStatus);
         }
+        
         if(isset($totalPrice)) {
             $sale->setTotalCost($totalCost);
         }
