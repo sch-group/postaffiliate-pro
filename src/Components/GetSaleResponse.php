@@ -19,6 +19,10 @@ class GetSaleResponse
     const USER_ID_COLUMN = 'userid';
 
     const TOTAL_COST = 'totalcost';
+
+    const STATUS = 'rstatus';
+
+    const CREATED_AT = 'dateinserted';
     /**
      * @var string
      */
@@ -43,6 +47,13 @@ class GetSaleResponse
      * @var float
      */
     private $totalCost;
+    /**
+     * @var string
+     */
+    private $status;
+
+    /** @var \DateTime string */
+    private $createdAt;
 
     /**
      * SaleRetrieved constructor.
@@ -52,6 +63,8 @@ class GetSaleResponse
      * @param string $commission
      * @param string $userId
      * @param float $totalCost
+     * @param string $status
+     * @param string $createdAt
      */
     public function __construct(
         string $id,
@@ -59,7 +72,9 @@ class GetSaleResponse
         string $campaignId,
         string $commission,
         string $userId,
-        float $totalCost
+        float $totalCost,
+        string $status,
+        string $createdAt
     ) {
         $this->id = $id;
         $this->transactionId = $transactionId;
@@ -67,6 +82,24 @@ class GetSaleResponse
         $this->commission = $commission;
         $this->userId = $userId;
         $this->totalCost = $totalCost;
+        $this->status = $status;
+        $this->createdAt = new \DateTime($createdAt);
+    }
+
+    /**
+     * @return \DateTime
+     */
+    public function getCreatedAt(): \DateTime
+    {
+        return $this->createdAt;
+    }
+
+    /**
+     * @return string
+     */
+    public function getStatus(): string
+    {
+        return $this->status;
     }
 
     /**
@@ -129,7 +162,9 @@ class GetSaleResponse
             [self::ORDER_ID_COLUMN],
             [self::COMMISSION_COLUMN],
             [self::USER_ID_COLUMN],
-            [self::TOTAL_COST]
+            [self::TOTAL_COST],
+            [self::STATUS],
+            [self::CREATED_AT],
         ];
     }
 }

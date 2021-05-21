@@ -33,7 +33,7 @@ class PostAffiliateSaleFinder extends PostAffiliateConnector implements SaleFind
         if(empty($sales)) {
             return null;
         }
-        $sale = array_shift($sales);
+        $sale = $this->defineFirstByCreatedAt($sales);
 
         return new GetSaleResponse(
             $sale[GetSaleResponse::USER_ID_COLUMN],
@@ -41,9 +41,12 @@ class PostAffiliateSaleFinder extends PostAffiliateConnector implements SaleFind
             $sale[GetSaleResponse::CAMPAIGN_ID_COLUMN],
             $sale[GetSaleResponse::COMMISSION_COLUMN],
             $sale[GetSaleResponse::USER_ID_COLUMN],
-            $sale[GetSaleResponse::TOTAL_COST]
+            $sale[GetSaleResponse::TOTAL_COST],
+            $sale[GetSaleResponse::STATUS],
+            $sale[GetSaleResponse::CREATED_AT]
         );
     }
+
 
     /**
      * @param string $orderNumber
@@ -68,6 +71,30 @@ class PostAffiliateSaleFinder extends PostAffiliateConnector implements SaleFind
         $recordset = $grid->getRecordset();
 
         return $recordset->toArray();
+    }
+
+    /**
+     * @param array $sales
+     * @return array
+     */
+    private function defineFirstByCreatedAt(array $sales): array
+    {
+        usort($sales, [PostAffiliateSaleFinder::class, 'dateCompare']);
+
+        return array_shift($sales);
+    }
+
+    /**
+     * @param array $a
+     * @param array $b
+     * @return false|int
+     */
+    private static function dateCompare(array $a, array $b): bool
+    {
+        $t1 = strtotime($a[GetSaleResponse::CREATED_AT]);
+        $t2 = strtotime($b[GetSaleResponse::CREATED_AT]);
+
+        return $t1 - $t2;
     }
 
 }
