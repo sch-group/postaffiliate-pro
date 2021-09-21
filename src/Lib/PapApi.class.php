@@ -1773,7 +1773,7 @@ if (!class_exists('Gpf_Data_RecordSet', false)) {
 
         public function sort(array $sortedArray)
         {
-            usort($sortedArray, array($this, 'compareRecords'));
+            // usort($sortedArray, array($this, 'compareRecords'));
             return $sortedArray;
         }
 
