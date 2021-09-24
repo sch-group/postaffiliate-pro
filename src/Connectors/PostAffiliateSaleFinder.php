@@ -89,7 +89,7 @@ class PostAffiliateSaleFinder extends PostAffiliateConnector implements SaleFind
      * @param array $b
      * @return false|int
      */
-    private static function dateCompare(array $a, array $b): bool
+    private static function dateCompare(array $a, array $b): int
     {
         $t1 = strtotime($a[GetSaleResponse::CREATED_AT]);
         $t2 = strtotime($b[GetSaleResponse::CREATED_AT]);
